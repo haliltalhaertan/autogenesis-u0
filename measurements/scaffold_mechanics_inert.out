@@ -1,0 +1,9 @@
+CLAIM           On HEX_7 at rest, stepping the production engine changes no position and no velocity in any sampled state. The mechanical layer contributes nothing in the regime where CHECKPOINT_063-077 computed G3, P4 and the T0 column.
+WOULD OVERTURN  Any sampled state showing a non-zero |dx| or |du|; or the negative control failing -- if a deliberately perturbed state ALSO comes back as unmoved, the detector is blind and every zero is meaningless.
+UNIVERSE        524288   (every state of HEX_7: 2^12 bond words x 2^7 activity words; this measurement samples every 977th)
+CONTROLS        3 declared, 1 negative, all as declared
+VALUE           0 of 537 moved
+DETAIL          largest displacement 0.0; the claim holds iff this is 0.0 (HOLDS)
+
+scaffold: n=7 nodes, E=12 candidate edges, 524,288 states
+sampled 537, moved 0, largest |dx| or |du| = 0.0

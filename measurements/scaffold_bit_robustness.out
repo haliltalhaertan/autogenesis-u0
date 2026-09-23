@@ -1,0 +1,20 @@
+CLAIM           At least one of the writable topological bits retains its value under a MAJORITY of single-node operations: more than half of the non-no-op perturbations of each of its two states leave that state's attractor unchanged.
+WOULD OVERTURN  Every bit losing its value under more than half of the operations. The bits would then be writable and unprotectable -- seed 63's 0 of 4 generalised -- and L-492 must be read as writability alone, with no claim of storage that survives contact.
+UNIVERSE        22   (the reversible object pairs the CORRECTED census finds -- MS-C-896: the 76 in L-492 counted duplicated scaffolds, because `min` over frozensets is not a canonical form. Every pair is examined, and for each, every phase, node and forced value, with no-ops excluded)
+CONTROLS        5 declared, 3 negative, all as declared
+VALUE           0 of 22 bits retain their value under a majority of single-node operations
+DETAIL          the claim asks for at least one (DOES NOT HOLD -- writable but unprotectable, as seed 63 was)
+
+n    A    B   A retained   B retained   A killed  B killed
+     6    7   30         0/12         1/12          8         6
+     6    7   37         0/12         1/12          8         6
+     6    7   43         0/12         0/12          8         8
+     6    7   55         0/12         0/12          8         8
+     6   30   32         1/12         0/12          6         6
+     6   32   37         0/12         1/12          6         6
+     6   32   43         0/12         0/12          6         8
+     6   32   55         0/12         0/12          6         8
+
+   reversible object pairs examined         22
+   pairs where BOTH states hold a majority     0
+   weaker retention fraction, histogram   {0.0: 22}

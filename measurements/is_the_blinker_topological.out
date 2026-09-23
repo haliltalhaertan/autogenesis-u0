@@ -1,0 +1,18 @@
+CLAIM           On the settled state of each seed that carries the object, freezing the bond set kills the activity oscillation. The node rule alone, on the graph as it stands, goes to a fixed point -- so the bond motion is load-bearing and the oscillation is genuinely topological, not a blinker with bonds in tow.
+WOULD OVERTURN  Activity still oscillating with the bonds frozen, on any seed. That would make the object an ordinary LLNA 2-cycle whose bond changes merely follow it, known since Miranda 2016, and `L-481` would have to be narrowed to say so. Also: the frozen-bond genome failing to freeze the bonds, in which case the test measured nothing.
+UNIVERSE        7   (every seed COUPLING_RATIO_001 scored as OBJECT_strong at U0's own genome; all seven are tested, none sampled)
+CONTROLS        4 declared, 2 negative, all as declared
+VALUE           6 of 7 topological, 1 shadow
+DETAIL          the claim says ALL seven are topological (DOES NOT HOLD -- 1 are ordinary LLNA blinkers)
+
+seed  bonds froze?  live: act  edges  frozen: act  edges   reading
+     8           yes          2      2[False, False]      1   topological -- dies
+    18           yes          2      2[False, True]      1   SHADOW -- blinks anyway
+    19           yes          2      2[False, False]      1   topological -- dies
+    35           yes          2      2[False, False]      1   topological -- dies
+    38           yes          2      2[False, False]      1   topological -- dies
+    63           yes          2      2[False, False]      1   topological -- dies
+    68           yes          2      2[False, False]      1   topological -- dies
+
+1 seed(s) keep blinking with the bonds frozen: [18]
+6 seed(s) fall to a fixed point: [8, 19, 35, 38, 63, 68]

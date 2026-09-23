@@ -1,0 +1,19 @@
+CLAIM           On a valid rest scaffold the potential energy is IDENTICAL for every bond configuration -- exactly zero, not approximately -- so no barrier separates any two bond sets and no memory can be stored in the topology. On the scaffolds the engine actually settles into the landscape is not flat, but forming a bond is uphill in every measured candidate pair while breaking one at r0 is free, which is a one-way slope rather than a memory.
+WOULD OVERTURN  Any nonzero energy spread on the hand-built patch, which would mean the rest-scaffold condition does not do what MS-C-741 says. A settled scaffold whose landscape IS flat, which would make the second half vacuous. Any candidate pair where forming a bond is downhill, which would break the one-way reading. Or check_lemma accepting a settled scaffold, which would collapse the distinction the file is built on.
+UNIVERSE        3400   (200 random bond configurations on the hand-built rest scaffold and 200 on each of up to 16 settled U0 scaffolds)
+CONTROLS        4 declared, 3 negative, all as declared
+VALUE           ideal landscape spread 0.000e+00 (flat=True); settled spread 0.982, one-flip barrier 0.0220, formation uphill 100%
+DETAIL          the claim needs the ideal patch exactly flat, settled scaffolds NOT flat and NOT accepted by check_lemma, and formation uphill everywhere (HOLDS)
+
+IDEAL rest scaffold  n=6 candE=6
+      200 random bond sets: min 0.000e+00  max 0.000e+00  spread 0.000e+00   FLAT=True
+
+   SETTLED scaffolds    16 of 16 reached positional rest
+      check_lemma accepts them: 0 of 16
+      energy spread over bond sets: median 0.982
+      one bond flipped: |dE| median 0.0220  max 0.1224
+      forming a bond is UPHILL in 967 of 967 candidate pairs (100%)
+      breaking a bond once relaxed to r0 costs 0 exactly, by the same algebra
+
+   L-376 puts the noise death threshold near 3e-2; the settled barrier is
+   0.0220, so memory here is marginal by roughly a factor of one.

@@ -1,0 +1,81 @@
+{
+  "protocol_id": "PILOT_001_BAND_CONNECTIVITY",
+  "version": "1.0",
+  "track": "DISCOVERY",
+  "frozen_at": "2026-08-21",
+  "purpose": "Decide, by measurement rather than argument, whether the node-rule activation band or the initial connectivity <k0> is the dominant determinant of whether anything survives at all. The original AUTOGENESIS META-SEARCH start prompt defers rule search to Tier 3 as too expensive. Enumeration shows the band space at valence<=6 contains only 92 distinct rules, making it exhaustively searchable in minutes. If the band axis dominates, it must be promoted to Tier 1 and the original ordering revised.",
+
+  "hypothesis": {
+    "H1": "The node-rule band explains more of the variation in survival than initial connectivity does.",
+    "rationale": "Under U0's band [1/6, 1/2] a degree-1 node can never activate, because its activation fraction is 0 or 1 and neither is inside the band. Measured consequence: ~98% of random sparse initial conditions go extinct within 3 steps. This suggests the band, not the physics constants, gates whether anything happens."
+  },
+
+  "fixed": {
+    "dimensions": 3,
+    "N": 32,
+    "cube_side": 3.0,
+    "min_separation": 0.7,
+    "active_fraction": 0.5,
+    "initial_degree_cap": 6,
+    "valence": 6,
+    "allocator": "B_support_orbit",
+    "horizon": 2048,
+    "tail_window": 128,
+    "physics": "U0 unchanged: r0=1, m=1, k_s=2, gamma=1, r_rep=0.75, k_rep=4, R_candidate=1.35, R_break=1.60, dt=0.02",
+    "note_on_cube_side": "3.0 rather than U0's 3.6 so that <k0> up to 4.0 is reachable at fixed geometry; density is held CONSTANT across the whole sweep so that k0 is the only connectivity axis varying."
+  },
+
+  "axes": {
+    "node_rule_band": "all distinct contiguous bands over the reachable activation fractions at valence<=6, enumerated by autogenesis.rules.enumerate_bands -> 92 rules including the empty band. birth band and survival band are held EQUAL to each other, as U0 has them; the birth!=survival space is a separate, larger axis and is out of scope for this pilot.",
+    "k0_values": [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+    "note_on_k0": "All eight values are reachable at this geometry (verified: requested == achieved up to 4.0, saturating at 4.47). achieved_mean_degree is recorded per run and must be checked, never assumed."
+  },
+
+  "seeds": {
+    "namespace": "pilot001_v1",
+    "smoke_namespace": "pilot001_smoke_v1",
+    "n_seeds": 200,
+    "note": "The smoke namespace is for wiring checks only and its results may never be used in the decision. Confirmation of any lead from this pilot requires a fresh holdout namespace not listed here."
+  },
+
+  "metrics": {
+    "primary_class": "one of EXTINCT / RUNAWAY / FROZEN / PERIODIC / RICH, assigned by autogenesis.metrics.screen",
+    "survival_rate": "fraction of seeds classified FROZEN, PERIODIC or RICH",
+    "non_trivial_rate": "fraction classified PERIODIC or RICH (a frozen crystal survives forever and is inert; it must not count as success)",
+    "log_persistence": "log(last_step), defined for dead runs too so the dead region carries a gradient",
+    "classification": "FROZEN = 1 distinct discrete signature in the trailing 128 steps; PERIODIC = 2..16; RICH = >16"
+  },
+
+  "controls": {
+    "R000_EMPTY": "band selecting no fraction. No node can ever activate. Everything must die at step 1. If it does not, the engine is broken.",
+    "R013": "band [0,1]. Every node with degree>=1 is active regardless of its neighbours, i.e. the state dynamics are switched OFF. This is the NULL-RULE arm: whatever survives here survives on mechanics alone. A real rule's persistence is only meaningful insofar as it differs from this."
+  },
+
+  "decision_rule": {
+    "metric": "survival_rate",
+    "band_effect_B": "for each k0, the range (max-min) of the metric across rules; B = median of those ranges over the eight k0 values",
+    "connectivity_effect_K": "for each rule, the range of the metric across the eight k0 values; K = median of those ranges over rules",
+    "exclude_rules_from_dominance": ["R000_EMPTY"],
+    "exclusion_reason": "the empty band is 0 by construction, not by measurement; including it would manufacture band spread. R013 (null rule) IS included, because it is a legitimate rule as well as a control.",
+    "band_dominates_if_ratio_above": 2.0,
+    "connectivity_dominates_if_ratio_below": 0.5,
+    "otherwise": "NEITHER_DOMINATES -- treat both as Tier 1 axes",
+    "consequence_if_BAND_DOMINATES": "promote the node-rule band from Tier 3 to Tier 1 in SEARCH_SPACE_V1 and record the revision in docs/DECISIONS.md",
+    "consequence_if_CONNECTIVITY_DOMINATES": "the original start prompt's Tier ordering stands; retract the proposal to promote rule search",
+    "committed_before_seeing_results": true
+  },
+
+  "labels": {
+    "max_label_this_protocol": "[LEAD]",
+    "reason": "This is DISCOVERY-track work on a self-chosen metric. No result from this pilot may be labelled [VALIDATED] or [SUPPORTED]. Confirmation requires a preregistered confirmatory protocol and a fresh seed namespace."
+  },
+
+  "out_of_scope": [
+    "any claim about memory, signal transfer, computation or autonomy",
+    "birth != survival rule space",
+    "valence other than 6",
+    "allocators other than B_support_orbit",
+    "density / physics-constant axes",
+    "2D"
+  ]
+}

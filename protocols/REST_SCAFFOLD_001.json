@@ -1,0 +1,88 @@
+{
+ "id": "REST_SCAFFOLD_001",
+ "title": "The founding object at EXACT kinematic rest: a Rest Scaffold on which U0 is literally the OB-122 coupled map, and a complete enumeration of that map's periodic orbits.",
+ "date": "2026-08-28",
+ "author": "lead researcher (HANDOFF_002 successor)",
+ "obligations": ["OB-104", "OB-122"],
+ "status": "FROZEN BEFORE ANY ORBIT, PERIOD, ATTRACTOR OR ACTIVITY VALUE WAS COMPUTED ON ANY SCAFFOLD. Includes the decision rule and the consequence of failing it.",
+ "code_hash_at_freeze": "16f710074eef6792",
+ "measurement_hash_at_freeze": "15640cced6591652",
+ "env_at_freeze": {"python": "3.14.3", "numpy": "2.5.2", "numba": "0.67.0"},
+ "producer": "tools/rest_scaffold_orbits.py",
+
+ "why_this_is_not_HANDOFF_002_section_5_as_written": {
+  "handoff_proposal": "HANDOFF_002 section 5 proposes, as the cheap first step, pointing tools/lo_zero_period_audit.py at U0's own band and asking whether any world reaches exact positional rest with a non-constant bond set.",
+  "why_it_is_redundant": "That question is already answered in the committed record, at U0's own band. runs/compute_012/common.py:29-43 builds the scan genome with band = u0_band(6), i.e. U0's [1/6, 1/2] for both birth and survival. Over that population MS-C-466 fills a 2x2 table with no empty cell: {at rest (<=1e-9), graph moving} = 164 worlds, verified from bytes in runs/compute_014/t1_table.json. MS-C-465 gives their topological periods, {2: 313, 3: 8, 4: 1, 5: 1} over the 323 never-still worlds, verified in runs/compute_014/t1_measure.json. Re-running the sweep would re-derive L-099, which is CLOSED.",
+  "what_is_genuinely_missing": "Those worlds are at rest to 4.9e-15 (MS-C-468), not to 0, with a residual per-step displacement up to 1.98e-11 (MS-C-473). Every claim about them is therefore a claim about a tolerance, and reading (a) of HANDOFF_002 section 5 -- x(t+2) == x(t) EXACTLY -- has never been exhibited. D-019 forbids anchoring a gate to a stored artefact, and a tolerance chosen after seeing 4.9e-15 would be exactly that. This protocol removes the tolerance instead of choosing one.",
+  "consequence": "OB-104's scoping arm stays closed. This is OB-122 -- characterise the periodic orbits of the coupled map -- attacked on a substrate where the map is exact rather than approximate."
+ },
+
+ "the_rest_scaffold_lemma": {
+  "statement": "Let X be a point set with, for every pair i != j: (L1) r_ij == r0 whenever r_ij <= R_candidate; (L2) r_ij >= repulsion_cutoff; (L3) r_ij >= 1e-12. Let u == 0. Then for EVERY bond set B and EVERY activity A, kernel._step returns nx == x and nu == u bit-for-bit.",
+  "proof": "A bond can only exist between candidate pairs: formed requires cand[i,j] (kernel.py:118) and kept requires bonds[i,j] (kernel.py:93), so B stays inside the candidate set for all time. For any pair: if bonded then by (L1) rr == r0, so coef = spring_k*(rr - r0) == 0.0, each f = 0.0 * rh is a signed zero, and F[i,c] += f / F[j,c] -= f leave F unchanged since z + 0.0 == z and z - (-0.0) == z for finite z. If not bonded then by (L2) rr >= repulsion_cutoff, so the elif rr < rep_cut branch is not taken and continue skips the pair. By (L3) no pair is coincident. The only contribution to F is the damping initialiser -gamma*u == -0.0, hence nu = u + dt*(-0.0)/mass == 0.0 and nx = x + dt*0.0 == x, exactly.",
+  "why_it_matters": "x and u are a fixed point of the continuous layer under EVERY discrete state, so one verified step verifies all of them by induction. On such a scaffold U0 IS the finite deterministic map of OB-122 with no approximation, and its orbit structure is exactly decidable -- exhaustively so on small scaffolds.",
+  "R_break_never_enters": "B stays inside the candidate set and R_candidate (1.35) < R_break (1.60), so the retention distance test cannot bind on a scaffold.",
+  "realisation": "h = 0.8660254037844387, ONE ULP above fl(sqrt(3)/2). At fl(sqrt(3)/2) the triangular-lattice diagonal computes r = 0.9999999999999999 and the scaffold leaks force at 1e-16 per step; at h, 0.25 + h*h == 1.0 and sqrt(1.0) == 1.0. Row heights use only negation and doubling of h, so every consecutive row gap is h to the bit."
+ },
+
+ "genome": "U0(), UNMODIFIED. genome hash is recorded by the producer. initial_conditions are bypassed -- states are constructed, not drawn by init.py -- and the run record says so. The PHYSICS is U0's: band [1/6, 1/2] birth and survival, valence 6, allocator B_support_orbit, formation_support_min 1, both A* flags true, r0 1.0, repulsion_cutoff 0.75, R_candidate 1.35, R_break 1.60.",
+
+ "scaffolds_frozen_before_the_run": [
+  {"name": "TRI_3", "arm": "exhaustive", "note": "one triangle"},
+  {"name": "TRI_4", "arm": "exhaustive"},
+  {"name": "TRI_2x3", "arm": "exhaustive"},
+  {"name": "HEX_7", "arm": "exhaustive", "note": "one hexagonal cell: centre at candidate degree 6, the smallest patch saturating U0's valence"},
+  {"name": "SQ_2x2", "arm": "exhaustive", "note": "triangle-free control"},
+  {"name": "SQ_2x3", "arm": "exhaustive", "note": "triangle-free control"},
+  {"name": "SQ_2x4", "arm": "exhaustive", "note": "triangle-free control"},
+  {"name": "TRI_5x5", "arm": "sampled", "note": "1000 worlds, 5 bond densities x 4 activity densities x 50 seeds"},
+  {"name": "SQ_5x5", "arm": "sampled", "note": "triangle-free control, 1000 worlds"}
+ ],
+ "no_scaffold_may_be_added_or_removed_after_any_orbit_is_read": "Adding a scaffold after seeing a result is the SEARCH_004 failure mode. The list above is the list.",
+
+ "sealed_predictions": {
+  "X1": {"claim": "Every scaffold reports max|dx| == max|du| == exactly 0.0 over 64 trials x 64 steps.", "status": "NOT AN OPEN PREDICTION -- disclosed as already observed for TRI_5x5, see disclosed_prior_knowledge. It is the lemma, and it is reported so the lemma is checked against the production kernel on every scaffold rather than argued."},
+  "X2": {"claim": "MS-C-730b control PASSES: zero attractors of period >= 2 with a CONSTANT bond set, on every scaffold.", "falsified_by": "any such attractor"},
+  "X3": {"claim": "MS-C-550 control PASSES: every attractor on SQ_2x2, SQ_2x3, SQ_2x4 and every sampled SQ_5x5 world has period 1.", "falsified_by": "one oscillating triangle-free orbit"},
+  "X4": {"claim": "THE OBJECT EXISTS: at least one attractor with period >= 2 and a non-constant bond set is found on HEX_7.", "falsified_by": "the complete HEX_7 enumeration containing none"},
+  "X5": {"claim": "TRI_3 has no attractor of period >= 2.", "reasoning": "a degree-1 node can never be active (act >= 1 and 2*act <= deg are incompatible at deg = 1), which collapses the sub-triangle bond sets; the full triangle admits only the two-active fixed points."},
+  "X6": {"claim": "The modal period among period->=2 attractors, pooled over triangulated scaffolds, is 2.", "reasoning": "MS-C-465 measured {2: 313, 3: 8, 4: 1, 5: 1} in random geometry."},
+  "X7": {"claim": "On HEX_7 the dead state (no bonds, no active) has basin share > 0.5.", "reasoning": "A == empty forces the next state to be the dead state, and high activity is lethal under hi = 1/2."},
+  "X8": {"claim": "On TRI_5x5, the fraction of the 1000 sampled worlds ending in the object is 0.25.", "falsified_by": "a measured fraction outside [0.05, 0.60]", "note": "a point estimate with a stated interval; 1000 worlds gives a standard error <= 0.016, so the interval is decidable with large margin."},
+  "X9": {"claim": "No sampled world exceeds MAX_ITER = 4096.", "falsified_by": "any world reported as exceeded_MAX_ITER"}
+ },
+
+ "decision_rule_and_consequence": {
+  "exit_code": "The producer exits 0 if and only if BOTH controls pass. A control failure is a result about a theorem, not a defect to be repaired quietly.",
+  "if_X2_fails": "MS-C-730b is refuted at its stated scope, or the scaffold is not the fixed graph it appears to be. The session stops being about OB-122 and becomes about the theorem, and no OB-122 claim may be recorded until that is settled.",
+  "if_X3_fails": "MS-C-550's triangle-free formation obstruction is wrong. Same consequence: the theorem is the result.",
+  "if_X4_is_false": "The recorded result is a NEGATIVE and is recorded as one: exact-rest topological oscillation does not occur on these lattice scaffolds under U0's band. OB-122's characterisation then gains a bound rather than an example, and no wider claim is made from a null.",
+  "if_X4_is_true": "OB-104's object is exhibited at residual EXACTLY 0.0 for the first time, and the complete enumerations become the first exact statement of the OB-122 orbit structure -- at the scaffold sizes enumerated, and at no others.",
+  "no_post_hoc_arms": "If a number lands outside a stated interval it is recorded as wrong. No prediction is widened, no scaffold is added, no cap is raised after reading a result."
+ },
+
+ "caps": {
+  "EXHAUSTIVE_MAX_STATES": 1048576,
+  "MAX_ITER": 4096,
+  "rule": "Both are printed with what exceeded them. A scaffold over budget is reported as NOT ENUMERATED, never as enumerated-and-empty. A sampled world over MAX_ITER is recorded as such and is counted as no period at all."
+ },
+
+ "disclosed_prior_knowledge": {
+  "rule": "D-036: state what reached the measurer by any route.",
+  "items": [
+   "A smoke test was run before this file was written: a 5x5 triangular scaffold at h, 20 random (bonds, active) states x 64 steps under the production kernel, giving max|dx| == max|du| == 0.0. X1 is therefore disclosed as already observed, not predicted.",
+   "A timing pilot was run: 198 us/step at N=7, 259 us/step at N=9, 281 us/step at N=25. Projection written down before launch: HEX_7 2^19 states ~104 s, SQ_2x4 2^18 ~52 s, TRI_2x3 2^15 ~7 s, the two sampled arms ~70 s, the nine freeze checks ~9 s; total ~4 minutes.",
+   "Read from committed documents before sealing: MS-C-445, MS-C-465, MS-C-466, MS-C-468, MS-C-469, MS-C-470, MS-C-473, MS-C-475, MS-C-477, MS-C-509, MS-C-550, MS-C-591, MS-C-612, MS-C-730b. X2, X3 and X6 rest on those.",
+   "NOT done before sealing: no orbit, period, transient, attractor count, basin size or activity value was computed on any scaffold, by any means."
+  ]
+ },
+
+ "the_six_preflight_questions_answered": {
+  "1_timed": "Yes, measured, not estimated: 198/259/281 us per production step at N=7/9/25 (20,000 and 5,000 step samples). Projection above: ~4 minutes total. EXHAUSTIVE_MAX_STATES was set to 2^20 as a consequence of that measurement, which is why SQ_3x3 (2^21, projected 543 s) is not in the scaffold list at all rather than being cut after the fact.",
+  "2_protocol_frozen": "This file, hashed to protocols/REST_SCAFFOLD_001.sha256, verified by the producer before it runs. It carries the decision rule and the consequence of failing it.",
+  "3_powered": "The exhaustive arms have no sampling error: they enumerate every state, so power is not a concept that applies -- that is the point of the design and the reason the small scaffolds are the primary arm. For the one sampled proportion (X8), n = 1000 gives a standard error <= 0.016 against an interval of width 0.55. Bins counted before running: 9 scaffolds, 7 complete enumerations, 2 x 1000 sampled worlds, 5 bond densities x 4 activity densities x 50 seeds.",
+  "4_gates_anchored_to_code": "Yes. Every gate reads the genome and the production kernel: (L1)(L2)(L3) compare against g.physics.r0, g.topology.candidate_radius and g.physics.repulsion_cutoff; the freeze gate compares against 0.0, which is a constant of the lemma, not of an artefact; the two controls are statements of MS-C-730b and MS-C-550 evaluated on freshly computed orbits. No threshold is read from any stored file. The only stored value the producer reads is this protocol's own hash.",
+  "5_controls_can_fail": "Three, and the failing case is constructed first in each. The cycle detector is run against a rho-map with transient 3 and period 7 (must read (3,7)), against a map with no cycle inside the cap (must read None, not a period), and against a period-6 map (must not read 7) -- all before any physics. The MS-C-730b control fails on one constant-bond period->=2 attractor. The MS-C-550 control fails on one oscillating triangle-free orbit, and `triangles` is MEASURED per scaffold by check_lemma rather than inferred from the scaffold's name, because the entire control rests on that number.",
+  "6_dead_code": "The first draft carried a SCAFFOLDS placeholder list and a tuple-keyed successor dict that the integer encoding replaced. Both were deleted before preflight; the file has one state encoding and one scaffold list."
+ }
+}

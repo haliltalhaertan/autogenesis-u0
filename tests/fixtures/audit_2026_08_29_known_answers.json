@@ -1,0 +1,82 @@
+{
+ "_comment": "Findings from the 2026-08-29 external audit whose answering ledger row is recorded in docs/AUDIT_RESPONSE_WORKLIST.md. Identifiers are extracted by tools/jev_audit_triage.identifiers and frozen here so the retrieval regression check needs no API key and no copy of the report.",
+ "cases": [
+  {
+   "finding_id": "T0 ölçülmedi; bağ kuralı tarafından zorunlu kılınıyor — ve kanıtı depoda iki kez duruyor",
+   "expected_row": "L-440",
+   "identifiers": [
+    "CHECKPOINT_055",
+    "CHECKPOINT_077",
+    "DERIVATION_REGISTER",
+    "EXTERNAL_REVIEW_003",
+    "MS-C-572",
+    "MS-C-838",
+    "T0",
+    "kernel.py"
+   ],
+   "text_head": "“ T0 6 hücrenin 6'sında da tutundu, iki girdi konvansiyonu\n ve iki okuyucu modeli boyunca… projenin en sağlam negatifi.”\n CHECKPOINT_077, üçüncü ek — MS-C-838 \n\n \n Denetlenen cümle Hiç bağ yokken hiçb"
+  },
+  {
+   "finding_id": "Mühür boşluğu brief'in söylediğinden büyük",
+   "expected_row": "L-452",
+   "identifiers": [
+    "AUDIT_BRIEF",
+    "code_hash_at_freeze",
+    "measurement_hash_at_freeze"
+   ],
+   "text_head": "AUDIT_BRIEF.md : “33 kontrol doğrulanamaz — üçü bu oturumda\n mühürlenen protokoller code_hash_at_freeze 'i atladığı için.” \n Gerçek dağılım: 11 tanesi protokolde eksik\n code_hash_at_freeze , 1 tanesi "
+  },
+  {
+   "finding_id": "Hiçbir kapı nesir okumuyor",
+   "expected_row": "L-458",
+   "identifiers": [
+    "MS-C-834",
+    "check_declared_caps",
+    "gate_test.py",
+    "preflight.py"
+   ],
+   "text_head": "29 kapının tamamı kodu, artefaktları, hash'leri ve envanterleri kontrol ediyor.\n Hiçbiri yayımlanmış bir cümleyi, dayandığı artefakt ve CAPS \n ile karşılaştırmıyor. tools/ ve tests/ içinde\n bir .md do"
+  },
+  {
+   "finding_id": "Mühür denetçisi bir dizin aşağıya bakmıyor, ve doğrulayıcıların 5/7'si CI dışında",
+   "expected_row": "L-439",
+   "identifiers": [
+    "CUBIC_CONFOUND_SPLIT",
+    "FROZEN_WINDOW_CAPACITY",
+    "HANDOFF_002",
+    "MS-C-833",
+    "audit_seal_identity",
+    "audit_seal_identity.py",
+    "code_hash",
+    "external_review",
+    "external_review_",
+    "measurement_hash",
+    "protocol_sha",
+    "ring_yield",
+    "verify_band_decision_table.py",
+    "verify_converse_counterexample",
+    "verify_local_characterization",
+    "verify_printed_condition_gap",
+    "verify_review_combinatorics",
+    "verify_sidecars.py",
+    "verify_window_iso_classes"
+   ],
+   "text_head": "tools/audit_seal_identity.py:66 RUNS.glob(\"*.json\") \n kullanıyor — rglob değil, ve yalnızca runs/ ağacına\n bakıyor. Mühürlü beş artefakt bu globun dışında kalıyor;\n denetçi 32 tanesini görüyor:\n\n \n \n "
+  },
+  {
+   "finding_id": "M4 daha kötü: koruma yazılmış, kapıya bağlanmamış",
+   "expected_row": "L-443",
+   "identifiers": [
+    "D-019",
+    "MS-C-658",
+    "MS-C-808",
+    "band_decision_table",
+    "bands_sha",
+    "enumerate_bands",
+    "rules.py",
+    "verify_band_decision_table.py"
+   ],
+   "text_head": "enumerate_bands sessizce bant düşürüyor ve\n CI'daki verify_band_decision_table.py bile fark\n etmiyor — çünkü kapının kapsamı, test ettiği şey tarafından\n tanımlanıyor: enumerasyon küçülünce doğrulayıc"
+  }
+ ]
+}

@@ -1,0 +1,446 @@
+{
+  "B1_final_questions": [
+    "Did an intermediate-connectivity recurrence/coherence window transfer to moving continuous 3D?",
+    "Which valence band is best under the preregistered separate metrics?",
+    "Does the signal extend from recurrence to localized persistent dynamics?",
+    "Does high connectivity retain dense-network/expansion risk?",
+    "Did a genuinely spatially self-organized motif emerge?",
+    "Is perturbation robustness present?",
+    "Is controlled motif-motif interaction present?",
+    "Is a separate preregistered Phase B2 parameter-space exploration scientifically justified?"
+  ],
+  "allocators": {
+    "A_batch_all": "After retention, each endpoint accepts its whole incident eligible proposal set iff the whole set fits remaining cap; an edge forms only if both endpoints accept.",
+    "B_support_orbit": "At each endpoint group eligible proposals by invariant integer common-active-support score, process score classes high-to-low, accept a whole tied class only if the class fits; stop at first class that cannot fit; mutual endpoint acceptance required.",
+    "C_overload_prune": "Start with all eligible proposals; perform exactly two bounded local overload-pruning rounds removing proposals whose two endpoints are simultaneously overloaded; after round 2 accept only edges whose two endpoints are not overloaded.",
+    "constraints": [
+      "deterministic",
+      "local",
+      "no global matching",
+      "no node-ID priority",
+      "no coordinate lexicographic priority",
+      "permutation equivariant",
+      "rotation/translation covariant through distance/support invariants",
+      "strict valence"
+    ],
+    "primary": [
+      "A_batch_all",
+      "B_support_orbit",
+      "C_overload_prune"
+    ]
+  },
+  "bond_rule": {
+    "alpha": 1.0,
+    "formation_common_active_support_min": 1,
+    "formation_distance_max": 1.35,
+    "formation_endpoint_types": [
+      "AA",
+      "AI"
+    ],
+    "formation_old_degree_eligibility": "old degree in B_t at each endpoint must be < target=valence; preserved from A2.1 semantics even if an old bond is scheduled to break this tick",
+    "hysteresis": "existing bond may remain while 1.35<r<=1.60 if endpoint retention condition holds; it is not a candidate for new formation outside 1.35",
+    "name": "A*|A*|a1|fs1 + geometric hysteresis",
+    "retention_break_distance_max": 1.6,
+    "retention_endpoint_types": [
+      "AA",
+      "AI"
+    ],
+    "retention_support_min": 0,
+    "strict_valence_cap": "degree_i(B_{t+1})<=v for every i and every step",
+    "support_definition": "number of active k != i,j such that distance(i,k)<=R_candidate AND distance(j,k)<=R_candidate at x_t"
+  },
+  "candidate_neighbors": {
+    "R_candidate": 1.35,
+    "candidate_proximity_is_not_bond": true,
+    "definition": "i,j are candidate neighbors iff Euclidean distance <=1.35*r0 at x_t",
+    "rationale": "with FCC nearest-neighbor spacing normalized to r0=1, 1.35 lies below the FCC second-shell distance sqrt(2), enabling an exact motion-frozen FCC semantic bridge test while leaving finite geometric tolerance",
+    "spatial_hash": {
+      "cell_size": 1.6,
+      "reference_engine": "naive O(N^2) allowed only for regression/unit tests",
+      "required_for_optimized_engine": true
+    }
+  },
+  "dimensionless_physics": {
+    "bond_equilibrium_distance_r0": 1.0,
+    "bonded_force": "for bonded i,j with r_hat=(x_j-x_i)/r: F_i=+k_s*(r-r0)*r_hat and F_j=-F_i",
+    "damping_gamma": 1.0,
+    "force_locality": "bond springs act only on bonded pairs; repulsion acts only on nonbonded pairs inside r_rep; damping is per-particle; no global relaxation/optimization/teleportation",
+    "integrator": "semi-implicit (symplectic) Euler: u_{t+1}=u_t+dt*F_t; x_{t+1}=x_t+dt*u_{t+1}",
+    "mass": 1.0,
+    "noise": null,
+    "nonbonded_repulsion": {
+      "coincident_pair_policy": "initial generator rejects r<0.70; any r<1e-12 during execution is an implementation/numerical failure, not resolved with an arbitrary direction",
+      "cutoff_r_rep": 0.75,
+      "law": "for nonbonded pair i,j with r<r_rep and r_hat=(x_j-x_i)/r: F_i=-k_rep*(r_rep-r)*r_hat, F_j=-F_i; zero otherwise",
+      "strength_k_rep": 4.0
+    },
+    "spring_strength_k_s": 2.0,
+    "timestep_dt": 0.02
+  },
+  "failure_and_safety": {
+    "extinction": "active_count==0; because no II formation/retention can regenerate activity, this is absorbing under the frozen rule",
+    "numerical_failure": [
+      "NaN/Inf in position or velocity",
+      "pair distance <1e-12",
+      "strict valence assertion failure",
+      "bond asymmetry",
+      "optimized/reference state mismatch in validation"
+    ],
+    "numerical_failure_policy": "do not retune physics to save an outcome. First treat as implementation failure. A science-parameter change requires a new pre-production protocol version/hash; after production starts it requires Phase B1 closure and B2 preregistration."
+  },
+  "frozen_at": "2026-08-13T19:13:00+03:00",
+  "hash_definition": "SHA256 of the exact UTF-8 bytes of PHASE_B_FROZEN_PROTOCOL.json; hash stored in sidecar PHASE_B_FROZEN_PROTOCOL.sha256 and must remain unchanged through B1 production.",
+  "horizons": {
+    "localized_persistence_window": 512,
+    "long_tail_steps": 16384,
+    "long_tail_trigger": "after the full N=32 primary table is closed, extend every run classified at t=4096 as PERSISTENT_NONRECURRENT, TRANSLATING, ROTATING, or EXPANDING; trigger list is fixed and cannot be manually curated",
+    "primary_steps": 4096,
+    "report_checkpoints": [
+      512,
+      1024,
+      2048,
+      4096
+    ],
+    "scale_panel_steps": 4096,
+    "warmup_steps_for_persistence_metrics": 256
+  },
+  "hypotheses_and_decision_rules": {
+    "H1_intermediate_localized_persistent_dynamics": {
+      "INCONCLUSIVE": "all other cases",
+      "NARROWED": "2/3 allocators PASS and the third does not show a supported reversal",
+      "REFUTED": "0/3 allocators PASS and at least 2/3 allocators show a supported reversal for at least one comparator (95% CI upper bound<0)",
+      "SUPPORTED": "3/3 allocators PASS",
+      "per_allocator_pass": "let Rv be LPND run incidence across the 36 frozen N=32 runs. Compute D4=max(R5,R6)-R4 and D8=max(R5,R6)-R8 inside each paired bootstrap. PASS iff both 95% CI lower bounds are >0.",
+      "statement": "v5/v6 produce higher LPND incidence than v4 and v8 in moving continuous 3D"
+    },
+    "H2_high_connectivity_turnover_dense_or_expansion_risk": {
+      "INCONCLUSIVE": "otherwise",
+      "NARROWED": "turnover criterion passes in >=2/3 but neither density nor runaway criterion does, or vice versa",
+      "REFUTED": "in >=2/3 allocators v12 fails to exceed the intermediate band on all three preregistered H2 diagnostics",
+      "SUPPORTED": "in >=2/3 allocators v12 exceeds max(v5,v6) with 95% CI lower bound>0 for per-step bond-turnover AND also for at least one of operational-runaway incidence or mean degree occupancy degree/v",
+      "statement": "v12 carries higher turnover and dense-networking and/or geometric-expansion risk than the intermediate band"
+    },
+    "H3_fixed_lattice_recurrence_ordering_may_weaken": {
+      "INCONCLUSIVE": "if CIs overlap zero in a way that prevents those assignments",
+      "NARROWED": "exactly 2/3 retain both ordering comparisons",
+      "REFUTED": "3/3 allocators retain both ordering comparisons with 95% CI lower bounds>0",
+      "SUPPORTED": "0 or 1 allocator retains both ordering comparisons",
+      "diagnostic": "use exact-discrete-recurrence incidence at t<=4096 with the same max(v5,v6)>v4 and >v8 paired-bootstrap comparison; absolute recurrence percentages are not compared directly with FCC/HCP because the state space changed",
+      "statement": "the fixed-position recurrence ordering may weaken or disappear after motion is introduced"
+    }
+  },
+  "implementation_validation_gate": {
+    "engines": [
+      "naive O(N^2) reference",
+      "optimized spatial-hash/cell-list"
+    ],
+    "must_pass_before_N32_production": [
+      "force antisymmetry",
+      "translation covariance",
+      "rotation covariance",
+      "particle-permutation invariance",
+      "strict valence all v=2,3,4,5,6,8,12",
+      "bond symmetry",
+      "synchronous old-bond node semantics",
+      "candidate-vs-bond hysteresis",
+      "deterministic replay",
+      "reference-vs-optimized state-by-state equality on small N",
+      "no NaN/Inf under synthetic stability fixtures",
+      "motion-frozen rescaled-FCC bridge exactly matches vendored A2.1 A/B/C topology transitions on a frozen corpus"
+    ],
+    "production_gate": "N=32 production is prohibited until all mandatory tests PASS and validation report is written",
+    "tolerances": {
+      "force_covariance_abs": 1e-10,
+      "position_velocity_engine_match_abs": 1e-12,
+      "rotation_covariance_abs": 1e-10
+    }
+  },
+  "initial_conditions": {
+    "active_fraction": 0.5,
+    "activity_assignment": "exactly N/2 particles active, selected by a dedicated frozen PRNG stream",
+    "coordinate_generator": "uniform rejection sample in centered cube, minimum pair separation 0.70*r0; after acceptance subtract arithmetic COM; no geometry optimization/relaxation",
+    "families": {
+      "A_unbonded_sparse": {
+        "cube_side": 4.5,
+        "initial_bond_degree_cap": 0,
+        "initial_bond_probability": 0.0
+      },
+      "B_very_sparse_bonded": {
+        "cube_side": 3.6,
+        "initial_bond_degree_cap": 2,
+        "initial_bond_probability": 0.08
+      },
+      "C_compact_bonded": {
+        "cube_side": 2.8,
+        "initial_bond_degree_cap": 2,
+        "initial_bond_probability": 0.12
+      }
+    },
+    "initial_bond_generator": "For B/C only: enumerate t0 candidate-proximity edges (distance<=R_candidate), assign independent random key and independent Bernoulli(p) from bond stream, sort by key, greedily add Bernoulli-success edges if both current initial degrees remain below 2. Initial bonds are not hand-shaped and need not satisfy fs1/endpoint-state eligibility; ordinary B1 retention/update acts from t=0 onward.",
+    "initial_velocity": "all zeros",
+    "paired_design": "for a given N/family/replicate, exactly the same initial state is used for every valence and allocator",
+    "primary_N": 32,
+    "primary_replicates_per_family": 12,
+    "primary_seed_examples": {
+      "A": [
+        32010001,
+        32010012
+      ],
+      "B": [
+        32020001,
+        32020012
+      ],
+      "C": [
+        32030001,
+        32030012
+      ]
+    },
+    "prng": "NumPy SeedSequence -> PCG64DXSM; three independent spawned streams per run for positions, activity and initial bonds",
+    "scale_holdout_N": [
+      16,
+      64,
+      128
+    ],
+    "scale_replicates_per_family": 8,
+    "seed_function": "seed = 1_000_000*N + 10_000*family_code + replicate; family_code A=1,B=2,C=3",
+    "seed_selection": "all replicate indices in the frozen ranges are run; none may be removed because its outcome is uninteresting or pathological"
+  },
+  "interaction_protocol": {
+    "eligibility": "two independently obtained persistent motifs; no interaction test is used to choose primary motifs",
+    "horizon_steps": 4096,
+    "orientation_set": "identity; +90 deg about x; +90 deg about y; +120 deg about unit (1,1,1); because the dynamics is separately rotation-covariance tested, these are frozen experimental orientations rather than rule axes",
+    "outcomes": [
+      "pass-through",
+      "scatter",
+      "merge",
+      "fragment",
+      "annihilate",
+      "recurrent product",
+      "controlled transformation",
+      "expansion"
+    ],
+    "relative_approach_speeds": [
+      0.0,
+      0.05,
+      0.1
+    ],
+    "replication_language": "forbidden unless lineage tracking demonstrates A + environment -> A + A under a predeclared structural-equivalence criterion",
+    "separations_r0": [
+      3.0,
+      5.0
+    ]
+  },
+  "metrics": {
+    "approximate_phase_recurrence": "exact discrete recurrence plus proper-rotation Kabsch alignment (translation+rotation allowed, reflection forbidden) with position RMSD<=0.03*r0 and velocity RMSD<=0.05*r0/time and max pair-distance error<=0.05*r0",
+    "branch_count": "number of particles with bond degree>=3",
+    "cycle_count": "sum over bonded components of E-V+1",
+    "exact_discrete_recurrence": "there exist t1<t2 with identical binary active vector and identical undirected bond edge set on persistent particle labels; positions/velocities are ignored for this diagnostic and it is not called full physical recurrence",
+    "graph_topology_persistence": "active-colored unlabeled bond graph tracked by WL hash with exact graph-isomorphism verification on hash collisions; reported separately from geometric shape persistence",
+    "required": [
+      "active_count",
+      "bond_count",
+      "degree_distribution",
+      "cumulative_and_per_step_bond_turnover",
+      "all-particle connected-component count",
+      "bonded-component count",
+      "largest_bonded_component_fraction",
+      "system_radius_of_gyration",
+      "largest-component_radius_of_gyration",
+      "system_spatial_span",
+      "largest-component_spatial_span",
+      "mean_pair_distance",
+      "largest-component_graph_diameter",
+      "cyclomatic_cycle_count",
+      "branch_count_degree_ge_3",
+      "exact_discrete_recurrence",
+      "approximate_phase_recurrence",
+      "shape_persistence",
+      "graph_topology_persistence",
+      "system_COM_displacement",
+      "motif_COM_displacement",
+      "rotation",
+      "fragmentation_events",
+      "merge_events",
+      "geometric_expansion",
+      "geometric_collapse",
+      "survival/extinction"
+    ],
+    "sample_every_steps": 1,
+    "turnover": "|B_{t+1} symmetric_difference B_t|, with formation and deletion also reported separately"
+  },
+  "motif_detection_and_localization": {
+    "golden_region_policy": "no single scalar gold score is permitted; localization, persistence, non-static dynamics, turnover, diversity, perturbation tolerance, interactions and runaway incidence remain separate columns",
+    "localized_persistent_nontrivial_LPND": "a run is positive if at least one tracked motif has a contiguous 512-step window after t>=256 satisfying all: component present throughout; active in >=90% of steps; spatial_span <=2.5*n^(1/3)*r0 in >=95% of steps; 95th-percentile Rg <=1.5*n^(1/3)*r0; no geometric-expansion condition during the window; and >=16 distinct steps contain an internal active-state change or internal bond change",
+    "motif_candidate": "a bonded connected component with >=4 particles and >=1 active particle",
+    "shape_persistence": "for stable-membership intervals, proper-rotation Kabsch RMSD to the interval medoid configuration; report median and 95th percentile",
+    "static_exclusion": "a window with zero active/bond changes is STATIC even if localized/persistent and does not count as LPND",
+    "tracking": "successive components are matched by maximum membership Jaccard overlap; links require Jaccard>=0.75. Globally ambiguous exact ties are marked ambiguous for that step rather than broken by particle ID/coordinate order."
+  },
+  "negative_controls": {
+    "all_bonds_disabled": "force B=empty after every bond stage; repulsion+damping remain; state rule uses empty old bond graph",
+    "all_nearby_bonding_high_connectivity": "control only: ignore A/B/C and set B_{t+1} to every proximity edge with r<=R_candidate; no valence cap; node rule and mechanics otherwise unchanged",
+    "bonds_frozen": "freeze B at B0; MF-L state dynamics and physical motion under those bonds continue",
+    "motion_frozen": "x=x0 and u=0 for all steps; full frozen topology/state dynamics continues in continuous-distance candidate graph",
+    "state_dynamics_disabled": "freeze active/passive vector at a0; topology and motion continue",
+    "use": "controls are diagnostics only and cannot redefine primary H1/H2/H3 success"
+  },
+  "no_rescue": "After any N=32 production outcome is observed, no rule, force constant, distance threshold, allocator, valence panel, seed generator, metric, horizon, classification threshold, or success criterion in this protocol may be changed to rescue Phase B1. Any later search requires a separately preregistered Phase B2.",
+  "node_rule": {
+    "birth_active_bonded_neighbor_fraction_inclusive": [
+      0.16666666666666666,
+      0.5
+    ],
+    "degree_zero": "passive at next state",
+    "name": "MF-L",
+    "neighbor_graph": "current OLD bonded-neighbor graph B_t only",
+    "survival_active_bonded_neighbor_fraction_inclusive": [
+      0.16666666666666666,
+      0.5
+    ],
+    "synchronous": true
+  },
+  "perturbation_protocol": {
+    "attacks": [
+      "every single existing bond deletion",
+      "every legal single candidate bond addition respecting valence",
+      "every single active-state flip",
+      "for each noncentral particle: radial outward and inward displacement of 0.15*r0",
+      "every single particle removal"
+    ],
+    "followup_steps": 2048,
+    "motif_selection": "per valence/allocator, eligible motifs must have LPND, lifetime>=1024, and no operational runaway. Deduplicate by active-colored graph topology descriptor (size, cycle rank, branch count, verified isomorphism class); select up to 6 classes by longest observed lifetime, ties by earliest frozen run order.",
+    "outcomes": [
+      "exact return",
+      "functional/topological return",
+      "alternative attractor",
+      "fragmentation",
+      "extinction",
+      "expansion"
+    ],
+    "run_after_primary_and_scale": "yes; no parameters from perturbation feed back into B1 dynamics",
+    "self_repair_term_gate": "may use 'self-repair' only if >=80% of bond deletions, >=80% of active flips, and >=50% of particle removals return to the same topological/phase attractor across at least 3 structurally distinct motifs in the same valence/allocator regime; otherwise say perturbation robustness"
+  },
+  "phase": "B0 frozen specification before any N=32 production outcomes",
+  "planned_outputs": [
+    "PHASE_B_FROZEN_PROTOCOL.json",
+    "PHASE_B_MODEL_SPEC.md",
+    "PHASE_B_UNIT_TEST_PLAN.md",
+    "phaseB_reference_engine.py",
+    "phaseB_optimized_engine.py",
+    "unit_tests/",
+    "validation_report.md",
+    "primary_N32_results.csv",
+    "valence_comparison.csv",
+    "trajectory_summaries/",
+    "motif_catalog.json",
+    "perturbation_results.csv",
+    "interaction_results.csv",
+    "scaling_results.csv",
+    "negative_controls.csv",
+    "final_hypothesis_table.md",
+    "exact_commands.txt",
+    "environment_lock.txt",
+    "SHA256SUMS.txt",
+    "curated_reproducibility.zip"
+  ],
+  "primary_statistics": {
+    "bootstrap": "10,000 stratified paired bootstrap resamples over replicate index within each family; bootstrap PRNG PCG64DXSM seeds A=880001,B=880002,C=880003",
+    "confidence_interval": "percentile 95% CI",
+    "multiplicity_policy": "H1 uses only the preregistered two comparisons against v4 and v8 per allocator; other metrics are reported descriptively/diagnostically and are not substituted into H1",
+    "unit_of_analysis": "paired frozen initial conditions stratified by seed family"
+  },
+  "production_results_seen": false,
+  "production_run_started": false,
+  "protocol_id": "CONTINUOUS_3D_VALENCE_LIMITED_DYNAMIC_TOPOLOGY_PHASE_B0_B1_V1",
+  "provenance": {
+    "accepted_fixed_position_scope": "Across FCC12 and HCP12, under locked MF-L + A*|A*|a1|fs1 and A/B/C allocators, preregistered total-exact-recurrence ordering max(v5,v6)>v4 and >v8 passed. Stronger universal diversity/coherence peak did not.",
+    "allocator_c_py_sha256": "f20b771c117b1932dc1f994db9451bf13d32870481c4324589dc1c9762e08497",
+    "hcp12_frozen_protocol_sha256": "38052911c536953f011d8b75a62eb1665af4aadec29d8e8325989dae80f78db9",
+    "hcp12_holdout_bundle_sha256": "bb46b7624f68122daa3b8449195cc70f2ce2d6b4842639476640f9c49c4175c5",
+    "phaseA2_1_bundle_sha256": "a6f8f199615017bc21a406fb9bc0382346a124559c5000a7fe0a19abdae9d781",
+    "phaseA2_1_locked_protocol_sha256": "5b73893a356b6680c2636569046afbdb2218d3da94c27018323f8a4c71b17f81",
+    "phaseA2_repro_py_sha256": "1e81efaf297c1bcf4f32edd560175472d40f06cdb72ea86867c6aff967998f2c"
+  },
+  "purpose": "Falsifiable test of whether the FCC12/HCP12 fixed-position intermediate-connectivity recurrence/coherence signal survives when particles move freely in continuous 3D space.",
+  "scale_holdout": {
+    "N": [
+      16,
+      64,
+      128
+    ],
+    "cannot_rescue_N32": true,
+    "interpretation": "used only to determine whether an N=32 finding generalizes, narrows, reverses or is inconclusive with scale",
+    "replicates_per_family": 8,
+    "run_order": "only after N=32 primary results and H1/H2/H3 statuses are frozen and reported",
+    "same_semantics": true
+  },
+  "state": {
+    "boundaries": "open/infinite 3D; no periodic boundaries, walls, global confinement or recentering force",
+    "no_hidden_state": true,
+    "particle_count": "fixed within each unperturbed run; no birth/death of particles in B1",
+    "particle_fields": [
+      "position x_i in R^3",
+      "velocity u_i in R^3",
+      "binary active/passive state a_i",
+      "undirected current bond list B"
+    ],
+    "particle_labels": "persistent integer indices may be used only for storage, replay, paired metrics and trajectory tracking; dynamics/allocator decisions may not depend on index value or ordering"
+  },
+  "status_vocabulary": [
+    "SUPPORTED",
+    "NARROWED",
+    "REFUTED",
+    "INCONCLUSIVE"
+  ],
+  "step_semantics": {
+    "new_bond_mechanics": "a newly accepted bond becomes mechanically active immediately in the same transition; a geometrically/semantically broken bond exerts no force in that transition",
+    "order": [
+      "1. From x_t build candidate-neighbor relation and continuous common-active support.",
+      "2. Compute active state a_{t+1} synchronously from a_t and OLD bond graph B_t using MF-L.",
+      "3. Compute retained/formed bond graph B_{t+1} from x_t,a_t,B_t using frozen A*|A*|a1|fs1 plus geometric rupture and the selected allocator.",
+      "4. Compute forces from x_t,u_t and NEW bond graph B_{t+1}, plus nonbonded repulsion and damping.",
+      "5. Semi-implicit Euler update gives u_{t+1},x_{t+1}."
+    ],
+    "reason_for_old_bond_node_update": "preserves A2.1 synchronous semantics"
+  },
+  "trajectory_classification": {
+    "COLLAPSING": "system Rg/Rg0<=0.5 AND mean-pair-distance/initial<=0.5 for >=128 consecutive steps",
+    "EXPANDING": "system Rg/Rg0>=2.5 OR system span/span0>=2.5 for >=128 consecutive steps",
+    "FRAGMENTING": "a bonded component of size>=4 splits into >=2 descendant components each size>=2 and the split persists >=32 steps",
+    "MERGING": "two bonded components each size>=3 become one component containing >=75% of each predecessor and remain joined >=32 steps",
+    "PERIODIC": "same motif exhibits >=4 approximate phase recurrences with a single dominant integer lag p in [2,256] accounting for >=75% of recurrence intervals",
+    "PERSISTENT_NONRECURRENT": "meets LPND and has no approximate phase recurrence in its qualifying window",
+    "QUASIPERIODIC/RECURRENT": "motif has >=3 approximate phase recurrences but does not meet PERIODIC dominant-lag criterion",
+    "ROTATING": "stable-membership motif window >=512; cumulative proper-rotation orientation change>=pi/2; COM displacement<1*r0; aligned shape RMSD p95<=0.10*r0; inertia-shape orientation is only scored when eigenvalue-gap/trace>=0.10, otherwise rotation label is undefined rather than forced",
+    "STATIC": "terminal 512-step motif window has zero internal active/bond changes, 95th-percentile particle speed<0.01 and 95th-percentile aligned shape drift<0.02*r0",
+    "TRANSLATING": "stable-membership motif window >=512; net COM displacement>=2*r0; linear COM path R^2>=0.90; mean COM speed>=0.005; aligned shape RMSD p95<=0.10*r0; internal graph topology present in >=90% of steps; debris fraction outside tracked membership<=0.10 of original motif size",
+    "labels": [
+      "STATIC",
+      "PERIODIC",
+      "QUASIPERIODIC/RECURRENT",
+      "PERSISTENT_NONRECURRENT",
+      "TRANSLATING",
+      "ROTATING",
+      "FRAGMENTING",
+      "MERGING",
+      "EXPANDING",
+      "COLLAPSING"
+    ],
+    "multi_label_allowed": true,
+    "operational_runaway": "EXPANDING and never returns below both Rg/Rg0<2.0 and span/span0<2.0 before t=4096; finite-horizon label only"
+  },
+  "valence_panel": {
+    "primary": [
+      4,
+      5,
+      6,
+      8,
+      12
+    ],
+    "secondary_controls": [
+      2,
+      3
+    ],
+    "v7": "not part of B1; cannot be added after outcomes to rescue the primary result"
+  }
+}

@@ -1,0 +1,10 @@
+CLAIM           Under a rest test that requires EVERY frame in the scored window to be bit-identical to its predecessor, fewer than 7 of the 96 seeds at U0 carry OBJECT_strong -- seed 38 at least should drop, since it is still moving at step 8148 and the window opens at 8062.
+WOULD OVERTURN  The strict count coming back equal to the loose one, which would mean the one-pair test was not actually loose on this population and L-483's caveat was theoretical; or the strict count EXCEEDING the loose one, which is impossible unless the two tests disagree about which seeds they are scoring and the comparison is broken.
+UNIVERSE        96   (every seed of the 96-seed pilot family at U0's own genome, the same population COUPLING_RATIO_001 scored; none sampled)
+CONTROLS        4 declared, 3 negative, all as declared
+VALUE           6 of 96 strict, 7 loose
+DETAIL          the claim says the strict count is smaller (HOLDS)
+
+loose  (x(T) vs x(T-2) only): 7  [8, 18, 19, 35, 38, 63, 68]
+strict (all 130 frames):     6  [8, 18, 19, 35, 63, 68]
+dropped by the strict test: [38]

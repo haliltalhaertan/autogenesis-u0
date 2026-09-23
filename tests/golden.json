@@ -1,0 +1,75 @@
+{
+  "code_hash": "706a00b7d372bbf2",
+  "cases": {
+    "U0_default_s0": {
+      "genome_hash": "0a545a09c00a425d",
+      "seed_index": 0,
+      "steps": 512,
+      "initial_state_hash": "279985ffca31b30d",
+      "final_state_hash": "92b8dbc91203a46a"
+    },
+    "U0_default_s7": {
+      "genome_hash": "0a545a09c00a425d",
+      "seed_index": 7,
+      "steps": 512,
+      "initial_state_hash": "4232cd046a62fe7e",
+      "final_state_hash": "eb059a2d26d39cae"
+    },
+    "U0_familyA": {
+      "genome_hash": "3afe58139d2d5398",
+      "seed_index": 3,
+      "steps": 512,
+      "initial_state_hash": "8064cf5ca9c032b3",
+      "final_state_hash": "cbf4be2faee7af7b"
+    },
+    "U0_familyC": {
+      "genome_hash": "a215a33fd88b41ef",
+      "seed_index": 3,
+      "steps": 512,
+      "initial_state_hash": "1d167455aea1cd9f",
+      "final_state_hash": "5bf1d7cac6d68746"
+    },
+    "dense_allocA": {
+      "genome_hash": "7045b86e0d124972",
+      "seed_index": 1,
+      "steps": 256,
+      "initial_state_hash": "9d981f63220f490b",
+      "final_state_hash": "ccc6ca3b12632972"
+    },
+    "dense_allocC": {
+      "genome_hash": "1d122300cc3de550",
+      "seed_index": 1,
+      "steps": 256,
+      "initial_state_hash": "9d981f63220f490b",
+      "final_state_hash": "2b35d52019999daa"
+    },
+    "valence12_dense": {
+      "genome_hash": "1b4aef6ec6890c3d",
+      "seed_index": 1,
+      "steps": 256,
+      "initial_state_hash": "9d981f63220f490b",
+      "final_state_hash": "34898ac19be1eb35"
+    },
+    "two_dimensional": {
+      "genome_hash": "9c67a54e178cb57c",
+      "seed_index": 4,
+      "steps": 256,
+      "initial_state_hash": "8f738c5ff23b1505",
+      "final_state_hash": "a4bb6063f53130e3"
+    },
+    "gamma_low": {
+      "genome_hash": "20bdbaeb9e7893a0",
+      "seed_index": 2,
+      "steps": 512,
+      "initial_state_hash": "545ecda44b05b471",
+      "final_state_hash": "4ef329f06ecd1ad3"
+    },
+    "stiff_spring": {
+      "genome_hash": "0c7d928eea4bd7f5",
+      "seed_index": 2,
+      "steps": 512,
+      "initial_state_hash": "545ecda44b05b471",
+      "final_state_hash": "87c5be74a243f211"
+    }
+  }
+}

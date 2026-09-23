@@ -1,0 +1,25 @@
+CLAIM           Deduped by a real canonical form, the connected rest scaffolds of 3 to 6 nodes number far fewer than the 443 reported in L-491, and at most 141 -- the count of connected unlabelled simple graphs in that range. The existence of writable topological bits survives; every count does not.
+WOULD OVERTURN  A recount still above the 141 ceiling, which would mean the new canonical form is broken too; or the corrected census finding NO writable topological bit, which would make L-492 an artefact of the duplication rather than merely miscounted.
+UNIVERSE        36   (isomorphism classes of connected rest scaffolds of 3..6 nodes on the exact triangular patch, deduped by a canonical form over sorted tuples)
+CONTROLS        4 declared, 2 negative, all as declared
+VALUE           36 classes, 13 carry an object, 3 hold a writable topological bit
+DETAIL          the claim needs the count under the 141 ceiling and the writable bit to survive (HOLDS)
+
+isomorphism classes, correct canonical form      36
+   the broken form's count (L-491 reported 443)    443
+   ceiling: connected unlabelled graphs n=3..6     141
+
+    triangles  classes  carrying  writable
+            0       10         0         0
+            1        8         0         0
+            2       11         6         0
+            3        4         4         0
+            4        3         3         3
+
+   object attractors, total           62
+   reversible live pairs, total      124
+   reversible OBJECT pairs, total     22
+   classes carrying an object         13
+   classes with a writable bit         3
+
+   proposed rule  OBJECT <=> (triangles >= 2 and max degree >= 4): holds on this family

@@ -1,0 +1,16 @@
+CLAIM           On every rest scaffold whose candidate graph is triangle-free, no bond forms at ANY of its states: B(t+1) is a subset of B(t) everywhere, exhaustively. On the scaffolds that do have triangles, states where a bond forms exist. The zero object count on the square scaffolds is this, not a coincidence.
+WOULD OVERTURN  A single state on a triangle-free scaffold where a bond forms -- that kills the theorem outright. Or no forming state anywhere on a triangled scaffold, which would mean triangles are not what distinguishes the two families and the mechanism named here is the wrong one.
+UNIVERSE        827648   (every state of every scaffold listed, each visited once; complete enumeration, no sampling and no horizon)
+CONTROLS        5 declared, 3 negative, all as declared
+VALUE           0 of 270,592 triangle-free states form a bond; all 2 triangled scaffolds do
+DETAIL          the claim holds iff no triangle-free state forms and every triangled scaffold has one (HOLDS)
+
+scaffold   n   E  triangles   states  states forming a bond
+   SQ_2x2     4   4          0      256                      0
+   SQ_2x3     6   7          0     8192                      0
+   SQ_2x4     8  10          0   262144                      0
+   TRI_2x3    6   9          4    32768                  23956  (first at code 3)
+   HEX_7      7  12          6   524288                 416638  (first at code 3)
+
+   3 triangle-free scaffold(s), 270,592 states, 0 formed a bond -- exhaustive
+   2 triangled scaffold(s), every one has forming states

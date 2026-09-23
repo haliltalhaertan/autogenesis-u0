@@ -1,0 +1,14 @@
+CLAIM           For every rest scaffold class of 3 to 6 nodes: no edge whose candidate-graph support is below formation_support_min ever forms, at any state; and every edge that flickers inside an attractor has support at or above it. The set of movable edges is bounded per edge, not per graph.
+WOULD OVERTURN  One edge of support below m forming at one state -- that kills the theorem. Or every edge of support at or above m being frozen too, which would make the containment vacuous and the bound useless even though technically true.
+UNIVERSE        1927680   (every (state, edge) pair of every rest scaffold class of 3..6 nodes; the theorem is per edge, so the universe is per edge too)
+CONTROLS        5 declared, 4 negative, all as declared
+VALUE           0 formations and 0 flickers on edges below the support bound; 353220 formations above it
+DETAIL          the claim needs both zeros and a non-vacuous positive arm (HOLDS)
+
+formation_support_min m = 1
+   candidate edges with s_C(e) <  m :     75
+   candidate edges with s_C(e) >= m :    138
+   formation events on LOW-support edges  :      0   (the theorem says 0)
+   formation events on HIGH-support edges : 353220   (non-vacuity: must be > 0)
+   flickering edges in cycles, LOW support :      0   (the theorem says 0)
+   flickering edges in cycles, HIGH support:     75

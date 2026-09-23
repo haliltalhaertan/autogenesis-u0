@@ -1,0 +1,57 @@
+CLAIM           Across all 141 connected isomorphism classes on 3 to 6 nodes, the classes the U0 physics can realize as rest scaffolds are compared against the classes that carry an OBJECT. The contingency between the two is reported with an exact one-sided hypergeometric p-value, so 'the physics selects for computation' becomes a measured statement with a null instead of an impression.
+WOULD OVERTURN  The realizable count not being 36, or the ceiling not being 141, which would mean this file and L-496 did not enumerate the same family. A base rate of zero or of one, which makes the comparison vacuous rather than negative. Any state moving a position, which voids the rest reduction the whole measurement stands on. The claim here is the TABLE, not a direction: an enrichment and a null result are both reportable and neither overturns the file.
+UNIVERSE        8940384   (every state of every connected graph on 3 to 6 nodes, each stepped once through the engine-gated abstract map, plus the realizable family from L-496)
+CONTROLS        12 declared, 9 negative, all as declared
+VALUE           13 of 36 physics-reachable classes carry an object against a base rate of 73/141 (0.70x, table p = 0.991; rank p = 1; matched on (n,E) over 10 cells p = 0.00821) -> TRIANGLE PACKING, not selection beyond it
+DETAIL          the claim is the pair of tests, not their direction; it needs the ceiling at 141 and the realizable family at 36 (HOLDS)
+
+ceiling: connected unlabelled graphs n=3..6     141
+   realizable on the exact triangular patch         36   (L-496: 36)
+        25/141 classes,     4 s
+        50/141 classes,    51 s
+        75/141 classes,   117 s
+       100/141 classes,   271 s
+       125/141 classes,   644 s
+
+      n  classes  capable  reachable   both
+      3        2        0          2      0
+      4        6        0          4      0
+      5       21        8          8      3
+      6      112       65         22     10
+
+   base rate, all classes           73 / 141  = 0.518
+   among physics-reachable          13 / 36   = 0.361
+   expected if independent                       18.6 classes
+   enrichment factor                             0.70x
+   exact one-sided hypergeometric p              0.9914
+   1292 s
+
+   OBJECT attractors per class, reachable   median 0, mean 1.72 over 36
+   OBJECT attractors per class, the rest    median 4, mean 14.52 over 105
+   rank test, one-sided p                        0.9996
+
+   matched on (n, E) -- the density confound removed
+      n   E  reach  rest  med in  med out
+      4   4      1     1       0        0
+      5   4      2     1       0        0
+      5   5      2     3       0        0
+      5   6      3     2       1        0
+      5   7      1     3       2        0
+      6   5      4     2       0        0
+      6   6      5     8       0        0
+      6   7      7    12       1        0
+      6   8      3    19       2        0
+      6   9      3    17      10        4
+   10 comparable cells, stratified one-sided p   0.008212
+
+   matched on (n, E, triangles) -- the enabling structure held fixed too
+   9 comparable cells, stratified one-sided p   0.9638
+
+   L-496's rule (triangles >= 2 and max degree >= 4) on the FULL family:
+      satisfies the rule  81   carries an object  73   both  71
+      rule but no object  10   object but not the rule   2
+
+   verdict: TRIANGLE PACKING, not selection beyond it
+   Both directions were reportable before the run. A null here does not
+   fail the measurement; it confirms MS-C-741's deflation, that the
+   mechanical layer is inert once the graph is chosen.

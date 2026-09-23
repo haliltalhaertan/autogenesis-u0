@@ -1,0 +1,82 @@
+{
+ "protocol_id": "REVIEW_FOLLOWUP_20260828",
+ "version": "1.0",
+ "frozen_at": "2026-08-28",
+ "purpose": "The external follow-up report of 2026-08-28, recorded VERBATIM as claimed numbers before this project measured any of them, and sealed. D-015: pre-registration is enforced by a hash, not by intent. The reviewer's report is a legitimate pre-registration for a reproduction -- it named every number in advance -- and freezing it here is what makes the agreement checkable rather than asserted.",
+ "source": {
+  "snapshot": "a09b573d79ee866aaae475f1d0518e9afc7dd5a7",
+  "note": "The reviewer states the project tree was untouched and no source change, commit or push was made. HEAD is three commits ahead of this snapshot; both commits touching _TRAJECTORY_FILES add code that either raises or does nothing (MS-C-719 input check, MS-C-723 constraints) and neither writes to a state, so trajectories are unchanged by construction. tests/golden.json agrees on all ten cases.",
+  "reviewer_tool_sha256": "c7247f4a3118170e2453addab9e16f1dedfbf5003e4b1fb8533a44150150a645",
+  "reviewer_result_sha256": "af4fe8a86e68149d6180cdc973769aeab1f1ada0102585a781810e6932d493a2"
+ },
+ "decision_rule": "Each claim below is compared against an independently derived measurement. A claim is CONFIRMED when the measurement matches, EXTENDED when the measurement covers a strictly wider scope and agrees on the reported slice, and CONTESTED otherwise. A CONTESTED claim is reported with both numbers and neither is silently preferred. The consequence of a CONTESTED claim is that it is recorded as contested in docs/OPEN_OBLIGATIONS.md and blocks any citation of the claim until resolved.",
+
+ "claims": {
+  "S1_lo_zero_periods": {
+   "statement": "The lo=0 revival mechanism strongly prefers discrete period 2, but period 2 is not universal; period 1, period 4, and runs with no exact period inside a finite horizon all occur within the same production scope.",
+   "reviewer_scope": {"bands": 13, "seeds": [0, 1, 2, 7], "runs": 52,
+                      "horizon": 8192, "extended_horizon": 16384,
+                      "tail_window": 128, "namespace": "pilot001_v1"},
+   "reviewer_numbers": {"discrete_period_2": 46, "discrete_period_1": 4,
+                        "discrete_period_1_band": "R013",
+                        "discrete_period_4": 1, "no_exact_period": 1,
+                        "no_exact_period_case": "R005/seed0",
+                        "no_exact_period_distinct_signatures": 3,
+                        "no_exact_period_best_lag": {"p": 20, "matches": 104, "of": 109},
+                        "full_physical_periodic_runs": 3,
+                        "full_physical_period_2": ["R002/seed1", "R004/seed0"],
+                        "discrete_2_but_full_6": "R001/seed1"},
+   "reviewer_scope_note": "These describe what a FUTURE re-run produces under the current make_initial_state. init.py states its procedure is not bit-equal to the original U0 production PRNG consumption, so the result must not be attributed retroactively to the bytes of the old artefact."
+  },
+
+  "S2_single_edge_robustness": {
+   "statement": "Over all labelled graphs and all live U0 Boolean fixed points at n=2..6, the fixed points invariant under EVERY single-edge addition or deletion are exactly those with n=6, |A|=3, G[A]=K3, all A-P edges present, and G[P] a matching (empty matching included).",
+   "reviewer_numbers": {"fixed_points_scanned": 65020, "robust": 80,
+                        "predicted_formula": "C(6,3) * (1 + 3) = 20 * 4 = 80",
+                        "confusion_matrix_errors": 0,
+                        "colour_isomorphism_classes": 2,
+                        "labellings_no_passive_internal_edge": 20,
+                        "labellings_one_passive_internal_edge": 60},
+   "reviewer_scope_note": "Stated as a complete finite-domain result that may replace the mu_v > 1/(d_v+1) margin proposal; explicitly NOT yet asserted as an n>6 theorem."
+  },
+
+  "S3_impossibility_theorem": {
+   "statement": "On a fixed graph, if the birth band excludes 1 and the passive set is independent at every phase, there is no nontrivial activity cycle. Independent of the survival band; the birth side and the degree-zero convention suffice.",
+   "reviewer_numbers": {"prior_scan_nontrivial_cycles": 34962,
+                        "prior_scan_with_independent_passive_set": 0},
+   "project_prior_art": {
+    "note": "RECORDED BY THIS PROJECT BEFORE THE REPORT. This is CHECKPOINT_046's Lemma and Theorem, statement and proof: 'A(t) is a vertex cover' is 'P_t is independent', and for a contiguous band 'excludes 1' is hi < 1.",
+    "MS-C-481": {"cover_states": 432037, "violations": 0, "at_hi_eq_1": 404562},
+    "MS-C-482": {"connected_graphs": 27475, "qualifying_orbits_U0": 0,
+                 "qualifying_orbits_hi_eq_1": 3249},
+    "MS-C-509": "upgraded to an iff: a fixed graph carries a moving Boolean layer iff hi = 1"},
+   "new_content": "Only the survival-band independence is new. CHECKPOINT_046 states the node rule as a SINGLE band and PILOT_001's protocol scopes birth != survival out explicitly, so the theorem stood verified on the DIAGONAL of the 92x92 band-pair space."
+  },
+
+  "S4_float_safety_condition": {
+   "statement": "|b - q| > |fl(q) - q| + halfULP(fl(b)), with q = k/d, is a sufficient condition for the binary64 band decision to agree with the exact rational one. Sufficient, not necessary; no certificate at equality.",
+   "reviewer_numbers": {"probes": 1080, "exact_engine_divergences": 232,
+                        "naive_halfULP_only_false_safe": 31,
+                        "proved_condition_false_safe": 0},
+   "hypotheses": ["finite normalised bands in [0,1]",
+                  "binary64 round-to-nearest, ties-to-even",
+                  "no NaN, no overflow", "strict > in the condition"],
+   "reproduction_note": "The probe COUNT is construction-dependent and is not expected to reproduce; what must reproduce is that the proved rule issues zero false certificates and the naive rule issues some."
+  },
+
+  "S5_influence_vs_additivity": {
+   "statement": "Over all 512 subsets of the 9 cross edges between two U0 triangles, one-step zero cross influence implies additivity, but the converse fails: connected graphs with nonzero cross influence can still carry 3*3 = 9 shared live fixed points. Additivity appears in some connected graphs as a numerical/combinatorial equality.",
+   "reviewer_numbers": {"graphs": 512, "influence_free": 1,
+                        "influence_free_is_disconnected_only": true,
+                        "additive_total": 43,
+                        "additive_connected_with_influence": 42,
+                        "additive_by_cross_edge_count": {"0": 1, "3": 6, "6": 36},
+                        "family_3_edges": "a K1,3 star",
+                        "family_6_edges": "degree multiset (1,2,3) on both sides",
+                        "sixth_step_map_becomes_influence_free": 9},
+   "reviewer_conclusion": "One-step full block decomposition is a SUFFICIENT structural certificate for additivity; local Jacobian, finite-step Jacobian and absence of cross influence are not converses."
+  }
+ },
+
+ "consequence_of_failure": "A CONTESTED claim blocks citation of that claim anywhere in docs/ until it is resolved in docs/OPEN_OBLIGATIONS.md with both measurements recorded. A tool that cannot verify this file's seal must refuse to run rather than proceed against an unsealed statement."
+}

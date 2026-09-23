@@ -1,0 +1,11 @@
+CLAIM           On every state of every connected rest scaffold of 3 to 6 nodes, one step of the production engine changes no position and no velocity, bit for bit. The reduction to a finite map on (activity, bonds) that L-490, L-491 and L-492 rest on is exact, not inherited.
+WOULD OVERTURN  A single state anywhere with a non-zero |dx| or |du|. Scaffold.step_code discards x and u, so any motion at all means the enumerations were computed on a fiction and every result in L-490 through L-492 is void. Also: the perturbation construction failing its own control, which would void L-492 specifically.
+UNIVERSE        247904   (every state of every connected rest scaffold of 3..6 nodes; each stepped once and compared bit for bit, none sampled)
+CONTROLS        4 declared, 1 negative, all as declared
+VALUE           0 of 247904 states moved; 0 of 12320 perturbation constructions wrong
+DETAIL          the claim is that both are zero (HOLDS -- the reduction is exact)
+
+scaffolds                            36
+   states stepped and compared      247904
+   states that MOVED                     0   worst |dx| 0.0, |du| 0.0
+   perturbation constructions        12320   failures 0

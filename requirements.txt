@@ -1,0 +1,11 @@
+# OB-107 / OB-130: pinned so a CI run and a local run are the same experiment.
+# Measured in the environment that produced every result in docs/: Python 3.14.3.
+numpy==2.5.2
+numba==0.67.0
+# MS-C-871, second independent audit: `tools/plot_pilot_001.py` and `tools/viz.py`
+# import matplotlib unconditionally -- `matplotlib.use("Agg")` at module scope, not in
+# a try/except -- and it was absent from this file, so a clean environment built from
+# this manifest cannot run either of them. Both are PRODUCERS: `MS-C-736` widened the
+# provenance detector precisely because a figure that appears in a checkpoint is an
+# artefact like any other. Pinned to the version the figures in docs/ were drawn with.
+matplotlib==3.11.1

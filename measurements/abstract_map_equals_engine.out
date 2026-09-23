@@ -1,0 +1,10 @@
+CLAIM           A map re-implemented from the rule and reading only the candidate graph agrees with the production engine bit for bit on every state of every realizable rest scaffold class. At rest the discrete dynamics are a function of the graph alone, so the abstract map may be used on graphs no lattice realizes.
+WOULD OVERTURN  One state anywhere where the two maps differ. The re-implementation would then be wrong, or positions would enter the step by some route this reasoning misses, and either way nothing may be built on the abstract map.
+UNIVERSE        247904   (every state of every realizable rest scaffold class of 3..6 nodes; both maps are run on each and compared bit for bit)
+CONTROLS        4 declared, 3 negative, all as declared
+VALUE           0 of 247904 states disagree
+DETAIL          the claim needs zero (HOLDS -- the abstract map may be used on unrealizable graphs)
+
+scaffold classes compared            36
+   states compared                  247904
+   states where the maps differ          0
